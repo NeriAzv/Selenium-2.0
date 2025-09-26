@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Terminal Tool (CLI) &#8212; Neri Library 0.2.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=fc7d8818"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="canonical" href="https://neriazv.github.io/Neri-Library/cli.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Rest APIs" href="api.html" />
+    <link rel="prev" title="Browser Instance" href="driver.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="terminal-tool-cli">
+<h1>Terminal Tool (CLI)<a class="headerlink" href="#terminal-tool-cli" title="Link to this heading">¶</a></h1>
+<section id="core-functionality">
+<h2>Core Functionality<a class="headerlink" href="#core-functionality" title="Link to this heading">¶</a></h2>
+<p>The CLI module delivers production-ready automation for Python environment management and application deployment, showcasing enterprise-grade system integration capabilities.</p>
+</section>
+<section id="technical-highlights">
+<h2>Technical Highlights<a class="headerlink" href="#technical-highlights" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Environment Management</strong>: Complete virtual environment control (destructive rebuild with automatic dependency installation via <code class="docutils literal notranslate"><span class="pre">-v/--venv</span></code>)</p></li>
+<li><p><strong>Dependency Analysis</strong>: Comprehensive import detection including hidden dependencies (<code class="docutils literal notranslate"><span class="pre">-fi/--find-imports</span></code>)</p></li>
+<li><p><strong>Executable Packaging</strong>: Single-file standalone executable generation with PyInstaller integration (<code class="docutils literal notranslate"><span class="pre">-e/--exe</span></code>)</p></li>
+<li><p><strong>Automated Deployment</strong>: End-to-end dependency resolution and installation (<code class="docutils literal notranslate"><span class="pre">-i/--install-imports</span></code>)</p></li>
+<li><p><strong>Interactive Help</strong>: Complete feature documentation (<code class="docutils literal notranslate"><span class="pre">-h/--help</span></code>)</p></li>
+</ul>
+</section>
+<section id="command-reference">
+<h2>Command Reference<a class="headerlink" href="#command-reference" title="Link to this heading">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>nr            Initialize toolchain
+nr -e  {file.py}                  Generate Windows executable with embedded environment
+nr -fi {file.py}                  Detect all required imports
+nr -i  {file.py}                  Install detected dependencies
+nr -v                             Rebuild virtual environment with current requirements
+nr -v -ad {folders} -e {file.py}: Combine commands to run all operations together
+nr -h                             Display complete command reference
+</pre></div>
+</div>
+</section>
+<section id="implementation-notes">
+<h2>Implementation Notes<a class="headerlink" href="#implementation-notes" title="Link to this heading">¶</a></h2>
+<p>Demonstrated technical competencies:
+- The .exe (‘nr -e’) is self-contained and requires neither Python nor external dependencies
+- Advanced argument parsing architectures
+- Cross-platform subprocess management
+- Environment isolation techniques
+- Production-grade error handling
+- Automated dependency resolution</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Neri Library</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver.html">Browser Instance</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Terminal Tool (CLI)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#core-functionality">Core Functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#technical-highlights">Technical Highlights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command-reference">Command Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#implementation-notes">Implementation Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Rest APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system.html">System Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="elements.html">Element Manipulation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="driver.html" title="previous chapter">Browser Instance</a></li>
+      <li>Next: <a href="api.html" title="next chapter">Rest APIs</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Guilherme Neri.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/cli.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

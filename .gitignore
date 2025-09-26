@@ -1,0 +1,21 @@
+# Excluir a virtualenv local
+.venv/
+# Log sinistro
+Instancedriver.log
+
+build/
+# Pasta de backup do código
+.history/
+# Excluir arquivos de cache do Python
+__pycache__/
+# Excluir arquivos de configuração do PyCharm
+.idea/
+# Excluir arquivos de configuração do VSCode
+.vscode/
+# Excluir arquivos de configuração do Jupyter Notebook
+.ipynb_checkpoints/
+# Excluir arquivos de configuração do JupyterLab
+.jupyter/
+# Excluir arquivos de configuração do Jupyter Notebook
+.ipynb_checkpoints/
+main.spec
