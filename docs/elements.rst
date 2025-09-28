@@ -7,7 +7,7 @@ Example usage:
 
 .. code-block:: python
 
-   from neri_library import Elements
+   from SeleniumTwo import Elements
 
    # Find an element on the page
    element = Elements.find_element_with_wait("xpath", "//div[@class='example']")

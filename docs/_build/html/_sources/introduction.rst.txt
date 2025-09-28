@@ -1,6 +1,6 @@
 Introduction
 ============================
-The Neri Library is a PORTIFOLIO where interested parties can study my codes or assess my knowledge.
+The *Selenium Two Library* is a PORTIFOLIO where interested parties can study my codes or assess my knowledge.
 
 I created this advanced Python library for task automation, browser interaction, API manipulation, and more, all aimed at RPA processes. It is designed to facilitate the creation of robust and efficient scripts, especially for web scraping and integration with third-party programs.
 

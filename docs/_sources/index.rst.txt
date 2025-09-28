@@ -1,4 +1,4 @@
-Neri Library
+Selenium Two | made by neri
 ============
 
 .. toctree::

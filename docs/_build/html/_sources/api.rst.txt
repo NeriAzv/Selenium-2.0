@@ -7,7 +7,7 @@ Example usage:
 
 .. code-block:: python
 
-   from neri_library import invoke_api_list
+   from SeleniumTwo import invoke_api_list
 
    # Example GET request
    response = invoke_api_list("https://api.example.com/data", "your_token")

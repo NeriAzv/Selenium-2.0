@@ -7,7 +7,7 @@ Example usage:
 
 .. code-block:: python
 
-   from neri_library import System
+   from SeleniumTwo import System
 
    # Extract text from a PDF
    text = System.extract_pdf("path/to/file.pdf")
