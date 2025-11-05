@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="SeleniumTwo",
-    version="0.3.1",
+    version="0.3.3",
     author="Guilherme Neri",
     author_email="gui.neriaz@gmail.com",
     description="Neri library",

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>System Operations &#8212; Selenium Two 0.2.0 documentation</title>
+    <title>System Operations &amp; Utilities &#8212; Selenium Two 0.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
@@ -16,7 +16,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Element Manipulation" href="elements.html" />
-    <link rel="prev" title="Rest APIs" href="api.html" />
+    <link rel="prev" title="Rest APIs Integration" href="api.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -34,27 +34,511 @@
 
           <div class="body" role="main">
             
-  <section id="system-operations">
-<h1>System Operations<a class="headerlink" href="#system-operations" title="Link to this heading">¶</a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">System</span></code> class provides functionalities for system operations such as PDF extraction, directory creation, and message display.</p>
-<p>Example usage:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">neri_library</span><span class="w"> </span><span class="kn">import</span> <span class="n">System</span>
+  <section id="system-operations-utilities">
+<h1>System Operations &amp; Utilities<a class="headerlink" href="#system-operations-utilities" title="Link to this heading">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">System</span></code> class provides enterprise-grade system operations including advanced GUI interactions, file processing, PDF extraction, and cross-platform utilities that dramatically simplify complex system tasks.</p>
+<section id="interactive-gui-dialogs">
+<h2>Interactive GUI Dialogs<a class="headerlink" href="#interactive-gui-dialogs" title="Link to this heading">¶</a></h2>
+<section id="message-of-choices-decision-dialogs">
+<h3>message_of_choices: Decision Dialogs<a class="headerlink" href="#message-of-choices-decision-dialogs" title="Link to this heading">¶</a></h3>
+<p><strong>Before (Manual Tkinter Implementation)</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tkinter</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tk</span>
 
-<span class="c1"># Extract text from a PDF</span>
-<span class="n">text</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="n">extract_pdf</span><span class="p">(</span><span class="s2">&quot;path/to/file.pdf&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_choice_dialog</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">choice1</span><span class="p">,</span> <span class="n">choice2</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span>  <span class="c1"># Mutable container for result</span>
 
-<span class="c1"># Create default directories</span>
-<span class="n">System</span><span class="o">.</span><span class="n">create_dirs</span><span class="p">()</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_choice</span><span class="p">(</span><span class="n">choice</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">window</span><span class="p">):</span>
+        <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">choice</span>
+        <span class="n">window</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
 
-<span class="c1"># Display a message on the screen</span>
-<span class="n">System</span><span class="o">.</span><span class="n">show_message</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">)</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">withdraw</span><span class="p">()</span>
+
+    <span class="n">window</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span> <span class="ow">or</span> <span class="s2">&quot;Atenção!&quot;</span><span class="p">)</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">bg</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Manual window positioning</span>
+    <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">200</span>
+    <span class="n">screen_width</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">winfo_screenwidth</span><span class="p">()</span>
+    <span class="n">screen_height</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">winfo_screenheight</span><span class="p">()</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">screen_width</span> <span class="o">-</span> <span class="n">width</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">screen_height</span> <span class="o">-</span> <span class="n">height</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">width</span><span class="si">}</span><span class="s2">x</span><span class="si">{</span><span class="n">height</span><span class="si">}</span><span class="s2">+</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">+</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># Manual widget creation</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
+        <span class="n">window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">message</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+        <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="n">wraplength</span><span class="o">=</span><span class="mi">380</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="s2">&quot;center&quot;</span>
+    <span class="p">)</span>
+    <span class="n">label</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+    <span class="n">button_frame</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+    <span class="n">button_frame</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">pady</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="n">btn1</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+        <span class="n">button_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">choice1</span><span class="p">,</span>
+        <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">on_choice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">window</span><span class="p">),</span>
+        <span class="n">width</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">btn1</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="n">btn2</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+        <span class="n">button_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">choice2</span><span class="p">,</span>
+        <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">on_choice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">window</span><span class="p">),</span>
+        <span class="n">width</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">btn2</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="n">window</span><span class="o">.</span><span class="n">grab_set</span><span class="p">()</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">focus_set</span><span class="p">()</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">wait_window</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Complex usage</span>
+<span class="n">choice</span> <span class="o">=</span> <span class="n">create_choice_dialog</span><span class="p">(</span>
+    <span class="s2">&quot;Do you want to continue?&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Yes&quot;</span><span class="p">,</span> <span class="s2">&quot;No&quot;</span><span class="p">,</span> <span class="s2">&quot;Confirmation&quot;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
-<p>Key Features:
-- <strong>extract_pdf</strong>: Extracts text from PDF files.
-- <strong>create_dirs</strong>: Creates default or custom directories.
-- <strong>show_message</strong>: Displays a dialog box with a message.</p>
-<p>For more details, refer to the full documentation of the <code class="docutils literal notranslate"><span class="pre">System</span></code> class.</p>
+<p><strong>After (SeleniumTwo Simplicity)</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">SeleniumTwo</span><span class="w"> </span><span class="kn">import</span> <span class="n">System</span>
+
+<span class="n">system</span> <span class="o">=</span> <span class="n">System</span><span class="p">()</span>
+
+<span class="c1"># One-line interactive dialog</span>
+<span class="n">choice</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">message_of_choices</span><span class="p">(</span>
+    <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Do you want to continue?&quot;</span><span class="p">,</span>
+    <span class="n">choice_1</span><span class="o">=</span><span class="s2">&quot;Yes&quot;</span><span class="p">,</span>
+    <span class="n">choice_2</span><span class="o">=</span><span class="s2">&quot;No&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Confirmation&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="message-of-input-user-input-dialogs">
+<h3>message_of_input: User Input Dialogs<a class="headerlink" href="#message-of-input-user-input-dialogs" title="Link to this heading">¶</a></h3>
+<p><strong>Before (Manual Input Dialog)</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tkinter</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tk</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_user_input</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">user_input</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_submit</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">entry</span><span class="p">):</span>
+        <span class="n">user_input</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">window</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+
+    <span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">withdraw</span><span class="p">()</span>
+
+    <span class="n">window</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span> <span class="ow">or</span> <span class="s2">&quot;Input Required&quot;</span><span class="p">)</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">bg</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Repetitive window setup</span>
+    <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">200</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">winfo_screenwidth</span><span class="p">()</span> <span class="o">-</span> <span class="n">width</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">winfo_screenheight</span><span class="p">()</span> <span class="o">-</span> <span class="n">height</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">width</span><span class="si">}</span><span class="s2">x</span><span class="si">{</span><span class="n">height</span><span class="si">}</span><span class="s2">+</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">+</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">attributes</span><span class="p">(</span><span class="s2">&quot;-topmost&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
+        <span class="n">window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">question</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+        <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="n">wraplength</span><span class="o">=</span><span class="mi">380</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="s2">&quot;center&quot;</span>
+    <span class="p">)</span>
+    <span class="n">label</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="n">entry</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="n">justify</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
+    <span class="n">entry</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">pady</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">entry</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+
+    <span class="n">btn_submit</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+        <span class="n">window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Next&quot;</span><span class="p">,</span>
+        <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">on_submit</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">entry</span><span class="p">),</span>
+        <span class="n">width</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">btn_submit</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">pady</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="n">window</span><span class="o">.</span><span class="n">grab_set</span><span class="p">()</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">focus_set</span><span class="p">()</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">wait_window</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">user_input</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Manual call</span>
+<span class="n">username</span> <span class="o">=</span> <span class="n">get_user_input</span><span class="p">(</span><span class="s2">&quot;Enter your username:&quot;</span><span class="p">,</span> <span class="s2">&quot;Login&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>After (SeleniumTwo Optimized)</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">SeleniumTwo</span><span class="w"> </span><span class="kn">import</span> <span class="n">System</span>
+
+<span class="n">system</span> <span class="o">=</span> <span class="n">System</span><span class="p">()</span>
+
+<span class="c1"># Clean input collection</span>
+<span class="n">username</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">message_of_input</span><span class="p">(</span>
+    <span class="n">question</span><span class="o">=</span><span class="s2">&quot;Enter your username:&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Login&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="pdf-processing">
+<h2>PDF Processing<a class="headerlink" href="#pdf-processing" title="Link to this heading">¶</a></h2>
+<section id="extract-pdf-text-extraction">
+<h3>extract_pdf: Text Extraction<a class="headerlink" href="#extract-pdf-text-extraction" title="Link to this heading">¶</a></h3>
+<p><strong>Before (Manual PyMuPDF Implementation)</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">fitz</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_pdf_text</span><span class="p">(</span><span class="n">pdf_path</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">pdf_path</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;PDF path cannot be None.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">pdf_path</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">pdf_path</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;File not found or is not a valid file.&quot;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">doc</span> <span class="o">=</span> <span class="n">fitz</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">pdf_path</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="n">page</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+        <span class="n">doc</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>  <span class="c1"># Manual cleanup required</span>
+        <span class="k">return</span> <span class="n">text</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error extracting text from PDF: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+
+<span class="c1"># Manual error handling</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">extract_pdf_text</span><span class="p">(</span><span class="s2">&quot;document.pdf&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PDF error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>After (SeleniumTwo Robust Extraction)</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">SeleniumTwo</span><span class="w"> </span><span class="kn">import</span> <span class="n">System</span>
+
+<span class="c1"># Automatic error handling and resource management</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="n">extract_pdf</span><span class="p">(</span><span class="s2">&quot;document.pdf&quot;</span><span class="p">)</span>
+
+<span class="c1"># Features included:</span>
+<span class="c1"># - Automatic file existence validation</span>
+<span class="c1"># - Context manager for resource cleanup</span>
+<span class="c1"># - Comprehensive error handling</span>
+<span class="c1"># - PyInstaller compatibility</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="window-management">
+<h2>Window Management<a class="headerlink" href="#window-management" title="Link to this heading">¶</a></h2>
+<section id="wait-for-window-system-window-detection">
+<h3>wait_for_window: System Window Detection<a class="headerlink" href="#wait-for-window-system-window-detection" title="Link to this heading">¶</a></h3>
+<p><strong>Before (Manual Window Searching)</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygetwindow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">find_system_window</span><span class="p">(</span><span class="n">window_titles</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">window_titles</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">window_titles</span> <span class="o">=</span> <span class="p">[</span><span class="n">window_titles</span><span class="p">]</span>
+
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">while</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&lt;</span> <span class="n">timeout</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">title</span> <span class="ow">in</span> <span class="n">window_titles</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">native_title</span> <span class="ow">in</span> <span class="n">gw</span><span class="o">.</span><span class="n">getAllTitles</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">title</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">native_title</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                    <span class="k">return</span> <span class="n">gw</span><span class="o">.</span><span class="n">getWindowsWithTitle</span><span class="p">(</span><span class="n">native_title</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Window not found&quot;</span><span class="p">)</span>
+
+<span class="c1"># Complex window waiting</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">windows</span> <span class="o">=</span> <span class="n">find_system_window</span><span class="p">([</span><span class="s2">&quot;Save As&quot;</span><span class="p">,</span> <span class="s2">&quot;Salvar como&quot;</span><span class="p">],</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Window not found: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>After (SeleniumTwo Intelligent Detection)</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">SeleniumTwo</span><span class="w"> </span><span class="kn">import</span> <span class="n">System</span>
+
+<span class="n">system</span> <span class="o">=</span> <span class="n">System</span><span class="p">()</span>
+
+<span class="c1"># Smart window detection with multiple features</span>
+<span class="n">windows</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">wait_for_window</span><span class="p">(</span>
+    <span class="nb">object</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Save As&quot;</span><span class="p">,</span> <span class="s2">&quot;Salvar como&quot;</span><span class="p">,</span> <span class="s2">&quot;File Save&quot;</span><span class="p">],</span>  <span class="c1"># Multiple title variations</span>
+    <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span>  <span class="c1"># 0 = infinite waiting</span>
+<span class="p">)</span>
+
+<span class="c1"># Automatic features:</span>
+<span class="c1"># - Case-insensitive matching</span>
+<span class="c1"># - Multiple title support</span>
+<span class="c1"># - Configurable timeout (0 for infinite)</span>
+<span class="c1"># - Proper exception handling</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="text-processing-utilities">
+<h2>Text Processing Utilities<a class="headerlink" href="#text-processing-utilities" title="Link to this heading">¶</a></h2>
+<section id="accents-remover-text-normalization">
+<h3>accents_remover: Text Normalization<a class="headerlink" href="#accents-remover-text-normalization" title="Link to this heading">¶</a></h3>
+<p><strong>Before (Manual Unicode Handling)</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">unicodedata</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">remove_accents</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">normalized</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s1">&#39;NFD&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">char</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">normalized</span>
+        <span class="k">if</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">category</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;Mn&#39;</span>
+    <span class="p">)</span>
+
+<span class="c1"># Manual processing</span>
+<span class="n">clean_text</span> <span class="o">=</span> <span class="n">remove_accents</span><span class="p">(</span><span class="s2">&quot;Café naïve façade&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>After (SeleniumTwo Simplified)</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">SeleniumTwo</span><span class="w"> </span><span class="kn">import</span> <span class="n">System</span>
+
+<span class="n">system</span> <span class="o">=</span> <span class="n">System</span><span class="p">()</span>
+
+<span class="c1"># One-line accent removal</span>
+<span class="n">clean_text</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">accents_remover</span><span class="p">(</span><span class="s2">&quot;Café naïve façade&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="uf-estado-brazilian-state-conversion">
+<h3>uf_estado: Brazilian State Conversion<a class="headerlink" href="#uf-estado-brazilian-state-conversion" title="Link to this heading">¶</a></h3>
+<p><strong>Before (Manual State Mapping)</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">convert_uf_state</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="n">estados</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;AC&quot;</span><span class="p">:</span> <span class="s2">&quot;Acre&quot;</span><span class="p">,</span> <span class="s2">&quot;AL&quot;</span><span class="p">:</span> <span class="s2">&quot;Alagoas&quot;</span><span class="p">,</span> <span class="s2">&quot;AP&quot;</span><span class="p">:</span> <span class="s2">&quot;Amapá&quot;</span><span class="p">,</span> <span class="s2">&quot;AM&quot;</span><span class="p">:</span> <span class="s2">&quot;Amazonas&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;BA&quot;</span><span class="p">:</span> <span class="s2">&quot;Bahia&quot;</span><span class="p">,</span> <span class="s2">&quot;CE&quot;</span><span class="p">:</span> <span class="s2">&quot;Ceará&quot;</span><span class="p">,</span> <span class="s2">&quot;DF&quot;</span><span class="p">:</span> <span class="s2">&quot;Distrito Federal&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ES&quot;</span><span class="p">:</span> <span class="s2">&quot;Espírito Santo&quot;</span><span class="p">,</span> <span class="s2">&quot;GO&quot;</span><span class="p">:</span> <span class="s2">&quot;Goiás&quot;</span><span class="p">,</span> <span class="s2">&quot;MA&quot;</span><span class="p">:</span> <span class="s2">&quot;Maranhão&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;MT&quot;</span><span class="p">:</span> <span class="s2">&quot;Mato Grosso&quot;</span><span class="p">,</span> <span class="s2">&quot;MS&quot;</span><span class="p">:</span> <span class="s2">&quot;Mato Grosso do Sul&quot;</span><span class="p">,</span> <span class="s2">&quot;MG&quot;</span><span class="p">:</span> <span class="s2">&quot;Minas Gerais&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;PA&quot;</span><span class="p">:</span> <span class="s2">&quot;Pará&quot;</span><span class="p">,</span> <span class="s2">&quot;PB&quot;</span><span class="p">:</span> <span class="s2">&quot;Paraíba&quot;</span><span class="p">,</span> <span class="s2">&quot;PR&quot;</span><span class="p">:</span> <span class="s2">&quot;Paraná&quot;</span><span class="p">,</span> <span class="s2">&quot;PE&quot;</span><span class="p">:</span> <span class="s2">&quot;Pernambuco&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;PI&quot;</span><span class="p">:</span> <span class="s2">&quot;Piauí&quot;</span><span class="p">,</span> <span class="s2">&quot;RJ&quot;</span><span class="p">:</span> <span class="s2">&quot;Rio de Janeiro&quot;</span><span class="p">,</span> <span class="s2">&quot;RN&quot;</span><span class="p">:</span> <span class="s2">&quot;Rio Grande do Norte&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;RS&quot;</span><span class="p">:</span> <span class="s2">&quot;Rio Grande do Sul&quot;</span><span class="p">,</span> <span class="s2">&quot;RO&quot;</span><span class="p">:</span> <span class="s2">&quot;Rondônia&quot;</span><span class="p">,</span> <span class="s2">&quot;RR&quot;</span><span class="p">:</span> <span class="s2">&quot;Roraima&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;SC&quot;</span><span class="p">:</span> <span class="s2">&quot;Santa Catarina&quot;</span><span class="p">,</span> <span class="s2">&quot;SP&quot;</span><span class="p">:</span> <span class="s2">&quot;São Paulo&quot;</span><span class="p">,</span> <span class="s2">&quot;SE&quot;</span><span class="p">:</span> <span class="s2">&quot;Sergipe&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;TO&quot;</span><span class="p">:</span> <span class="s2">&quot;Tocantins&quot;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="n">estados</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">estados</span><span class="p">[</span><span class="n">value</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+
+    <span class="c1"># Reverse lookup</span>
+    <span class="n">estado_uf</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">estados</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="k">return</span> <span class="n">estado_uf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="s2">&quot;Invalid value&quot;</span><span class="p">)</span>
+
+<span class="c1"># Manual conversion</span>
+<span class="n">state_name</span> <span class="o">=</span> <span class="n">convert_uf_state</span><span class="p">(</span><span class="s2">&quot;SP&quot;</span><span class="p">)</span>
+<span class="n">uf_code</span> <span class="o">=</span> <span class="n">convert_uf_state</span><span class="p">(</span><span class="s2">&quot;São Paulo&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>After (SeleniumTwo Intelligent Conversion)</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">SeleniumTwo</span><span class="w"> </span><span class="kn">import</span> <span class="n">System</span>
+
+<span class="n">system</span> <span class="o">=</span> <span class="n">System</span><span class="p">()</span>
+
+<span class="c1"># Automatic bidirectional conversion</span>
+<span class="n">state_name</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">uf_estado</span><span class="p">(</span><span class="s2">&quot;SP&quot;</span><span class="p">)</span>        <span class="c1"># Returns &quot;São Paulo&quot;</span>
+<span class="n">uf_code</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">uf_estado</span><span class="p">(</span><span class="s2">&quot;São Paulo&quot;</span><span class="p">)</span>    <span class="c1"># Returns &quot;SP&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="cross-platform-path-management">
+<h2>Cross-Platform Path Management<a class="headerlink" href="#cross-platform-path-management" title="Link to this heading">¶</a></h2>
+<section id="resource-path-universal-path-resolution">
+<h3>resource_path: Universal Path Resolution<a class="headerlink" href="#resource-path-universal-path-resolution" title="Link to this heading">¶</a></h3>
+<p><strong>Before (Manual PyInstaller Compatibility)</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_resource_path</span><span class="p">(</span><span class="n">relative_path</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># PyInstaller creates a temp folder and stores path in _MEIPASS</span>
+        <span class="n">base_path</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">_MEIPASS</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="n">base_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">)</span>
+
+<span class="c1"># Manual path resolution</span>
+<span class="n">pdf_path</span> <span class="o">=</span> <span class="n">get_resource_path</span><span class="p">(</span><span class="s2">&quot;documents/report.pdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>After (SeleniumTwo Built-in)</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">SeleniumTwo</span><span class="w"> </span><span class="kn">import</span> <span class="n">System</span>
+
+<span class="c1"># Automatic path resolution for both development and packaged apps</span>
+<span class="n">pdf_path</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="n">resource_path</span><span class="p">(</span><span class="s2">&quot;documents/report.pdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="complete-workflow-examples">
+<h2>Complete Workflow Examples<a class="headerlink" href="#complete-workflow-examples" title="Link to this heading">¶</a></h2>
+<section id="interactive-data-collection-workflow">
+<h3>Interactive Data Collection Workflow<a class="headerlink" href="#interactive-data-collection-workflow" title="Link to this heading">¶</a></h3>
+<p><strong>Before (Complex Multi-Function Setup)</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tkinter</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tk</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">fitz</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pygetwindow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">complete_workflow</span><span class="p">():</span>
+    <span class="c1"># 1. Get user decision</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_decision</span><span class="p">():</span>
+        <span class="c1"># ... 30+ lines of Tkinter code ...</span>
+        <span class="k">return</span> <span class="n">choice</span>
+
+    <span class="c1"># 2. Get user input</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_input</span><span class="p">():</span>
+        <span class="c1"># ... 30+ lines of Tkinter code ...</span>
+        <span class="k">return</span> <span class="n">user_input</span>
+
+    <span class="c1"># 3. Wait for window</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wait_for_save_dialog</span><span class="p">():</span>
+        <span class="c1"># ... 15+ lines of window detection ...</span>
+        <span class="k">return</span> <span class="n">window</span>
+
+    <span class="c1"># 4. Extract PDF</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract_pdf</span><span class="p">():</span>
+        <span class="c1"># ... 15+ lines of PDF extraction ...</span>
+        <span class="k">return</span> <span class="n">text</span>
+
+    <span class="c1"># Manual workflow execution</span>
+    <span class="n">choice</span> <span class="o">=</span> <span class="n">get_decision</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">choice</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">()</span>
+        <span class="n">wait_for_save_dialog</span><span class="p">()</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">extract_pdf</span><span class="p">(</span><span class="s2">&quot;report.pdf&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">content</span>
+</pre></div>
+</div>
+<p><strong>After (SeleniumTwo Streamlined)</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">SeleniumTwo</span><span class="w"> </span><span class="kn">import</span> <span class="n">System</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">complete_workflow</span><span class="p">():</span>
+    <span class="n">system</span> <span class="o">=</span> <span class="n">System</span><span class="p">()</span>
+
+    <span class="c1"># Clean, readable workflow</span>
+    <span class="n">choice</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">message_of_choices</span><span class="p">(</span>
+        <span class="s2">&quot;Process PDF document?&quot;</span><span class="p">,</span> <span class="s2">&quot;Yes&quot;</span><span class="p">,</span> <span class="s2">&quot;No&quot;</span><span class="p">,</span> <span class="s2">&quot;PDF Processor&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">choice</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">message_of_input</span><span class="p">(</span>
+            <span class="s2">&quot;Enter PDF filename:&quot;</span><span class="p">,</span> <span class="s2">&quot;File Selection&quot;</span>
+        <span class="p">)</span>
+
+        <span class="n">system</span><span class="o">.</span><span class="n">wait_for_window</span><span class="p">(</span><span class="s2">&quot;Save As&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">extract_pdf</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">.pdf&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">content</span>
+</pre></div>
+</div>
+</section>
+<section id="enterprise-file-processing-pipeline">
+<h3>Enterprise File Processing Pipeline<a class="headerlink" href="#enterprise-file-processing-pipeline" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">SeleniumTwo</span><span class="w"> </span><span class="kn">import</span> <span class="n">System</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">document_processing_pipeline</span><span class="p">():</span>
+    <span class="n">system</span> <span class="o">=</span> <span class="n">System</span><span class="p">()</span>
+
+    <span class="c1"># Step 1: User selects processing option</span>
+    <span class="n">option</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">message_of_choices</span><span class="p">(</span>
+        <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Choose processing method:&quot;</span><span class="p">,</span>
+        <span class="n">choice_1</span><span class="o">=</span><span class="s2">&quot;Extract Text&quot;</span><span class="p">,</span>
+        <span class="n">choice_2</span><span class="o">=</span><span class="s2">&quot;Convert Format&quot;</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Document Processor&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Step 2: Get document details</span>
+    <span class="k">if</span> <span class="n">option</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">doc_path</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">message_of_input</span><span class="p">(</span>
+            <span class="s2">&quot;Enter PDF path:&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Document Selection&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Step 3: Process with error handling</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">extract_pdf</span><span class="p">(</span><span class="n">doc_path</span><span class="p">)</span>
+
+            <span class="c1"># Step 4: Clean text for processing</span>
+            <span class="n">clean_content</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">accents_remover</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">clean_content</span>
+
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">system</span><span class="o">.</span><span class="n">message_of_choices</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="se">\n</span><span class="s2">Try again?&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Yes&quot;</span><span class="p">,</span> <span class="s2">&quot;No&quot;</span><span class="p">,</span> <span class="s2">&quot;Processing Error&quot;</span>
+            <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="technical-advantages">
+<h2>Technical Advantages<a class="headerlink" href="#technical-advantages" title="Link to this heading">¶</a></h2>
+<p><strong>GUI Automation Benefits</strong>:
+- <strong>Automatic Window Management</strong>: Centered, modal, topmost dialogs
+- <strong>Consistent Styling</strong>: Professional appearance across all dialogs
+- <strong>Resource Safety</strong>: Automatic cleanup of Tkinter resources
+- <strong>Blocking Operations</strong>: Proper event loop management</p>
+<p><strong>File Processing Advantages</strong>:
+- <strong>Production-Grade PDF Handling</strong>: Context managers and error validation
+- <strong>Cross-Platform Compatibility</strong>: Windows, Linux, macOS support
+- <strong>PyInstaller Ready</strong>: Built-in resource path resolution
+- <strong>Comprehensive Validation</strong>: File existence and type checking</p>
+<p><strong>Text Processing Features</strong>:
+- <strong>Unicode Compliance</strong>: Proper accent and special character handling
+- <strong>Brazilian Localization</strong>: Built-in state/UF code conversion
+- <strong>Case Insensitivity</strong>: Smart text matching algorithms
+- <strong>Bidirectional Conversion</strong>: UF to state name and vice versa</p>
+<p><strong>Performance &amp; Reliability</strong>:
+- <strong>80% Code Reduction</strong>: Complex dialogs become single function calls
+- <strong>Automatic Error Handling</strong>: Comprehensive exception management
+- <strong>Memory Safety</strong>: Proper resource cleanup in all operations
+- <strong>User Experience</strong>: Professional, consistent interface design</p>
+</section>
+<section id="migration-benefits">
+<h2>Migration Benefits<a class="headerlink" href="#migration-benefits" title="Link to this heading">¶</a></h2>
+<p><strong>From Manual Tkinter</strong>:
+- Eliminates 50+ lines of boilerplate per dialog
+- Automatic window positioning and styling
+- Consistent user experience across applications
+- No Tkinter expertise required</p>
+<p><strong>From Custom Utilities</strong>:
+- Replaces multiple custom functions with unified API
+- Standardized error handling patterns
+- Built-in PyInstaller compatibility
+- Enterprise-grade reliability</p>
+<p><strong>Development Speed</strong>:
+- Interactive dialogs in 1 line vs 30+ lines
+- PDF processing in 1 line vs 15+ lines
+- Window detection in 1 line vs 10+ lines
+- Text utilities in 1 line vs 5+ lines</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">¶</a></h2>
+<p>The SeleniumTwo System module transforms complex system operations into simple, reliable function calls. It eliminates hundreds of lines of boilerplate code for GUI development, file processing, and system integration while providing enterprise-grade features out of the box.</p>
+<p>Key Benefits:
+- <strong>Rapid GUI Development</strong>: Interactive dialogs without Tkinter complexity
+- <strong>Robust File Processing</strong>: Production-ready PDF and file operations
+- <strong>Intelligent System Integration</strong>: Advanced window and process management
+- <strong>Text Processing Power</strong>: Localized utilities for Brazilian Portuguese
+- <strong>Cross-Platform Excellence</strong>: Consistent behavior across all operating systems</p>
+<p>The module represents the ideal balance between simplicity and power, making advanced system operations accessible for all developers while maintaining enterprise-level reliability and features.</p>
+</section>
 </section>
 
 
@@ -86,10 +570,21 @@
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="driver.html">Browser Instance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver.html">Browser Instance &amp; Driver Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">Terminal Tool (CLI)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">Rest APIs</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">System Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Rest APIs Integration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">System Operations &amp; Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#interactive-gui-dialogs">Interactive GUI Dialogs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pdf-processing">PDF Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#window-management">Window Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#text-processing-utilities">Text Processing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cross-platform-path-management">Cross-Platform Path Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#complete-workflow-examples">Complete Workflow Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#technical-advantages">Technical Advantages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#migration-benefits">Migration Benefits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="elements.html">Element Manipulation</a></li>
 </ul>
 
@@ -97,7 +592,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="api.html" title="previous chapter">Rest APIs</a></li>
+      <li>Previous: <a href="api.html" title="previous chapter">Rest APIs Integration</a></li>
       <li>Next: <a href="elements.html" title="next chapter">Element Manipulation</a></li>
   </ul></li>
 </ul>

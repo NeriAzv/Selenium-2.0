@@ -203,7 +203,7 @@ def wait_for_element_disappear(object, type, timeout=10):
 
     return find_elements.backcode__dont_use__wait_for_d(driver, object, type, timeout=tempo)
 
-def nr_library(element, method, key, relative = None):
+def Select_element_func(element, method, key, relative = None):
     """
     Selects an option in a <select> element.
 
@@ -420,8 +420,11 @@ def move_mouse_smoothly(element, click=False):
             break
 
 RESET, GR, ORANGE, DK_ORANGE = "\033[0m", "\033[38;5;34m", "\033[38;5;214m", "\033[38;5;130m"
-result = subprocess.run(['pip', 'show', "SeleniumTwo"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-version_line = next((line for line in result.stdout.decode().splitlines() if line.startswith('Version:')), None)
-try: print(f"\n\n{ORANGE}Neri library imported - {re.sub(r"[^0-9.b]", "", version_line)}{RESET}")
+try:
+    result = subprocess.run(['pip', 'show', "SeleniumTwo"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    version_line = next((line for line in result.stdout.decode().splitlines() if line.startswith('Version:')), None)
+except:
+    pass
+try: print(f"\n\n{ORANGE}SeleniumTwo imported - {re.sub(r"[^0-9.b]", "", version_line)}{RESET}")
 except: pass
 # create_dirs()
