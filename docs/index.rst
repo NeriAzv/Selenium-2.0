@@ -7,7 +7,7 @@ Selenium Two | made by Guilherme Neri
 
    introduction
    driver
-   cli
-   api
-   system
    elements
+   system
+   api
+   cli
