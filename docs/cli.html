@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Terminal Tool (CLI) &#8212; Selenium Two 0.2.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=fc7d8818"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="canonical" href="https://neriazv.github.io/Neri-Library/cli.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Rest APIs Integration" href="api.html" />
+    <link rel="prev" title="Browser Instance &amp; Driver Management" href="driver.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="terminal-tool-cli">
+<h1>Terminal Tool (CLI)<a class="headerlink" href="#terminal-tool-cli" title="Link to this heading">¶</a></h1>
+<p>The SeleniumTwo CLI provides comprehensive project management and automation tools for Python development, specifically optimized for web automation projects.</p>
+<section id="core-functionality">
+<h2>Core Functionality<a class="headerlink" href="#core-functionality" title="Link to this heading">¶</a></h2>
+<p>The CLI module delivers production-ready automation for Python environment management, dependency handling, and application deployment with enterprise-grade system integration.</p>
+</section>
+<section id="command-reference">
+<h2>Command Reference<a class="headerlink" href="#command-reference" title="Link to this heading">¶</a></h2>
+<section id="virtual-environment-management">
+<h3>Virtual Environment Management<a class="headerlink" href="#virtual-environment-management" title="Link to this heading">¶</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>st -v, --venv                    Creates virtual environment with all dependencies installed
+st -vc, --venv-clean             Creates clean virtual environment without dependencies
+st -rv, --recreate-venv          Recreates venv (without dependencies)
+st -dv, --delete-venv            Deletes virtual environment
+st -r, --requirements            Generates optimized requirements.txt file
+</pre></div>
+</div>
+</section>
+<section id="executable-generation">
+<h3>Executable Generation<a class="headerlink" href="#executable-generation" title="Link to this heading">¶</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>st -e, --exe {file.py}           Creates standalone .exe from Python file
+st -nc, --no-console             Creates .exe without console window
+st -z, --zip                     Creates zip archive of &#39;dist&#39; folder
+st -ic, --icon {path.ico}        Sets custom icon for .exe
+st -ad, --add-data {folders}     Adds external data/files to .exe
+</pre></div>
+</div>
+</section>
+<section id="dependency-management">
+<h3>Dependency Management<a class="headerlink" href="#dependency-management" title="Link to this heading">¶</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>st -fi, --find-imports {file.py} Discovers all required imports automatically
+st -vi, --verify-imports         Shows imports that couldn&#39;t be installed automatically
+st -i, --install-imports         Installs all detected dependencies
+</pre></div>
+</div>
+</section>
+<section id="file-operations">
+<h3>File Operations<a class="headerlink" href="#file-operations" title="Link to this heading">¶</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>st {filename}                    Specifies target file for operations
+st -h, --help                    Displays complete command reference
+</pre></div>
+</div>
+</section>
+</section>
+<section id="detailed-functionality">
+<h2>Detailed Functionality<a class="headerlink" href="#detailed-functionality" title="Link to this heading">¶</a></h2>
+<section id="virtual-environment-system">
+<h3>Virtual Environment System<a class="headerlink" href="#virtual-environment-system" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Smart Environment Creation</strong> (-v): Automatically detects and installs all project dependencies</p></li>
+<li><p><strong>Clean Environments</strong> (-vc): Creates minimal virtual environment without automatic installation</p></li>
+<li><p><strong>Environment Recycling</strong> (-rv): Complete environment rebuild for troubleshooting</p></li>
+<li><p><strong>Requirements Optimization</strong> (-r): Generates requirements.txt with only necessary packages</p></li>
+</ul>
+</section>
+<section id="executable-builder">
+<h3>Executable Builder<a class="headerlink" href="#executable-builder" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Single-File Distribution</strong> (-e): Creates self-contained .exe using PyInstaller</p></li>
+<li><p><strong>Stealth Mode</strong> (-nc): Generates executables without console windows</p></li>
+<li><p><strong>Resource Packaging</strong> (-ad): Embeds external files/folders into executable</p></li>
+<li><p><strong>Custom Branding</strong> (-ic): Applies custom icons to executables</p></li>
+<li><p><strong>Distribution Packaging</strong> (-z): Creates ready-to-distribute zip files</p></li>
+</ul>
+</section>
+<section id="intelligent-dependency-detection">
+<h3>Intelligent Dependency Detection<a class="headerlink" href="#intelligent-dependency-detection" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Import Analysis</strong> (-fi): Scans Python files and detects:
+- Direct imports (import, from statements)
+- SeleniumTwo-specific dependencies
+- Image processing libraries (OpenCV, Pillow)
+- Automation tools (pyautogui, pynput)
+- PDF manipulation libraries (PyMuPDF, PyPDF2)
+- Undetected browser drivers
+- CAPTCHA solving services</p></li>
+<li><p><strong>Smart Installation</strong> (-i): Automatically installs detected dependencies</p></li>
+<li><p><strong>Verification System</strong> (-vi): Identifies problematic installations</p></li>
+</ul>
+</section>
+</section>
+<section id="multi-command-scenarios">
+<h2>Multi-Command Scenarios<a class="headerlink" href="#multi-command-scenarios" title="Link to this heading">¶</a></h2>
+<section id="complete-project-setup">
+<h3>Complete Project Setup<a class="headerlink" href="#complete-project-setup" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>st<span class="w"> </span>-v<span class="w"> </span>-fi<span class="w"> </span>main.py<span class="w"> </span>-i<span class="w"> </span>-e<span class="w"> </span>main.py<span class="w"> </span>-z
+</pre></div>
+</div>
+<p>This single command:
+1. Creates virtual environment with dependencies (-v)
+2. Analyzes main.py for required imports (-fi)
+3. Installs detected dependencies (-i)
+4. Generates executable (-e)
+5. Creates distribution zip (-z)</p>
+</section>
+<section id="rapid-development-cycle">
+<h3>Rapid Development Cycle<a class="headerlink" href="#rapid-development-cycle" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>st<span class="w"> </span>-rv<span class="w"> </span>-fi<span class="w"> </span>script.py<span class="w"> </span>-i<span class="w"> </span>-e<span class="w"> </span>script.py<span class="w"> </span>-nc<span class="w"> </span>-ic<span class="w"> </span>icon.ico
+</pre></div>
+</div>
+<p>Perfect for development:
+1. Fresh environment rebuild (-rv)
+2. Import analysis for current script (-fi)
+3. Dependency installation (-i)
+4. Executable generation without console (-nc)
+5. Custom icon application (-ic)</p>
+</section>
+<section id="dependency-management-only">
+<h3>Dependency Management Only<a class="headerlink" href="#dependency-management-only" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>st<span class="w"> </span>-fi<span class="w"> </span>project.py<span class="w"> </span>-i<span class="w"> </span>-r
+</pre></div>
+</div>
+<p>Focus on dependencies:
+1. Import discovery (-fi)
+2. Automatic installation (-i)
+3. Requirements file generation (-r)</p>
+</section>
+<section id="quick-executable-with-resources">
+<h3>Quick Executable with Resources<a class="headerlink" href="#quick-executable-with-resources" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>st<span class="w"> </span>-e<span class="w"> </span>app.py<span class="w"> </span>-ad<span class="w"> </span>data:data<span class="w"> </span>-ad<span class="w"> </span>config:config<span class="w"> </span>-z
+</pre></div>
+</div>
+<p>Packaging with external resources:
+1. Executable creation (-e)
+2. Multiple data folders included (-ad)
+3. Zip distribution (-z)</p>
+</section>
+</section>
+<section id="technical-implementation">
+<h2>Technical Implementation<a class="headerlink" href="#technical-implementation" title="Link to this heading">¶</a></h2>
+<section id="advanced-features">
+<h3>Advanced Features<a class="headerlink" href="#advanced-features" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Real-time Animations</strong>: RGB animated progress indicators</p></li>
+<li><p><strong>Intelligent Import Mapping</strong>: 40+ predefined library mappings</p></li>
+<li><p><strong>Cross-Platform Compatibility</strong>: Windows, Linux, and macOS support</p></li>
+<li><p><strong>Error Resilience</strong>: Continues operation despite individual package failures</p></li>
+<li><p><strong>Automatic Clipboard</strong>: Copies pip commands to clipboard for manual use</p></li>
+<li><p><strong>Shadow DOM Navigation</strong>: Automatically handles Chrome extension configuration</p></li>
+</ul>
+</section>
+<section id="library-detection-intelligence">
+<h3>Library Detection Intelligence<a class="headerlink" href="#library-detection-intelligence" title="Link to this heading">¶</a></h3>
+<p>The CLI automatically detects and maps:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;extract_pdf&quot;          → &quot;PyMuPDF&quot;
+&quot;import requests&quot;      → &quot;requests&quot;
+&quot;import pyautogui&quot;     → &quot;pyautogui&quot;
+&quot;import cv2&quot;           → &quot;opencv-python&quot;
+&quot;undetected_chromedriver&quot; → &quot;undetected-chromedriver&quot;
+&quot;move_to_image&quot;        → [&quot;pyscreeze&quot;, &quot;pyautogui&quot;, &quot;Pillow&quot;, &quot;opencv-python&quot;]
+&quot;stealth max&quot;          → [&quot;webdriver-manager&quot;, &quot;undetected-chromedriver&quot;]
+And 30+ more intelligent mappings...
+</pre></div>
+</div>
+</section>
+<section id="production-features">
+<h3>Production Features<a class="headerlink" href="#production-features" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Enterprise-Grade Error Handling</strong>: Comprehensive exception management</p></li>
+<li><p><strong>Parallel Processing</strong>: Threaded animations during long operations</p></li>
+<li><p><strong>Automatic Cleanup</strong>: Temporary file and directory management</p></li>
+<li><p><strong>Permission Handling</strong>: Windows file locking workarounds</p></li>
+<li><p><strong>Unicode Support</strong>: Full international character support</p></li>
+<li><p><strong>Terminal Control</strong>: Advanced ANSI escape sequence usage</p></li>
+</ul>
+</section>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="basic-development-workflow">
+<h3>Basic Development Workflow<a class="headerlink" href="#basic-development-workflow" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Analyze dependencies</span>
+st<span class="w"> </span>-fi<span class="w"> </span>my_automation.py
+
+<span class="c1"># 2. Create environment and install</span>
+st<span class="w"> </span>-v<span class="w"> </span>-i
+
+<span class="c1"># 3. Generate executable</span>
+st<span class="w"> </span>-e<span class="w"> </span>my_automation.py<span class="w"> </span>-nc
+
+<span class="c1"># 4. Create distributable package</span>
+st<span class="w"> </span>-z
+</pre></div>
+</div>
+</section>
+<section id="advanced-enterprise-deployment">
+<h3>Advanced Enterprise Deployment<a class="headerlink" href="#advanced-enterprise-deployment" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Complete CI/CD pipeline in one command</span>
+st<span class="w"> </span>-rv<span class="w"> </span>-fi<span class="w"> </span>main.py<span class="w"> </span>-i<span class="w"> </span>-e<span class="w"> </span>main.py<span class="w"> </span>-ad<span class="w"> </span>assets:assets<span class="w"> </span>-ad<span class="w"> </span>config:config<span class="w"> </span>-ic<span class="w"> </span>company.ico<span class="w"> </span>-nc<span class="w"> </span>-z
+</pre></div>
+</div>
+</section>
+<section id="troubleshooting-verification">
+<h3>Troubleshooting &amp; Verification<a class="headerlink" href="#troubleshooting-verification" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check for installation issues</span>
+st<span class="w"> </span>-fi<span class="w"> </span>script.py<span class="w"> </span>-i<span class="w"> </span>-vi
+
+<span class="c1"># Rebuild from scratch</span>
+st<span class="w"> </span>-dv<span class="w"> </span>-v<span class="w"> </span>-fi<span class="w"> </span>script.py<span class="w"> </span>-i<span class="w"> </span>-e<span class="w"> </span>script.py
+</pre></div>
+</div>
+</section>
+</section>
+<section id="implementation-notes">
+<h2>Implementation Notes<a class="headerlink" href="#implementation-notes" title="Link to this heading">¶</a></h2>
+<p>Key Technical Competencies:</p>
+<ul class="simple">
+<li><p><strong>Self-Contained Executables</strong>: No Python or external dependencies required</p></li>
+<li><p><strong>Advanced Argument Architecture</strong>: Flexible command combination system</p></li>
+<li><p><strong>Cross-Platform Process Management</strong>: Consistent behavior across OS</p></li>
+<li><p><strong>Environment Isolation</strong>: Complete project dependency separation</p></li>
+<li><p><strong>Production-Grade Reliability</strong>: Robust error handling and recovery</p></li>
+<li><p><strong>Automated Dependency Resolution</strong>: Intelligent package detection and installation</p></li>
+<li><p><strong>Real-Time User Feedback</strong>: Animated progress indicators and status updates</p></li>
+</ul>
+<p>The CLI transforms complex development operations into simple, one-line commands while maintaining enterprise-level reliability and feature completeness.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Selenium Two</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver.html">Browser Instance &amp; Driver Management</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Terminal Tool (CLI)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#core-functionality">Core Functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command-reference">Command Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#detailed-functionality">Detailed Functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#multi-command-scenarios">Multi-Command Scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#technical-implementation">Technical Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage-examples">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#implementation-notes">Implementation Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Rest APIs Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system.html">System Operations &amp; Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="elements.html">Element Manipulation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="driver.html" title="previous chapter">Browser Instance &amp; Driver Management</a></li>
+      <li>Next: <a href="api.html" title="next chapter">Rest APIs Integration</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Guilherme Neri.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/cli.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
