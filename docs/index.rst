@@ -1,4 +1,4 @@
-Selenium Two | made by Guilherme Neri
+Selenium Two | made by Neri
 ============
 
 .. toctree::
