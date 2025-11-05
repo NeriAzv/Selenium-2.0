@@ -24,7 +24,7 @@ class cli:
         self.parser = argparse.ArgumentParser(
             add_help=False,
             description=f"{self.visuals.bold}{self.visuals.DK_ORANGE} Selenium Two Made By Neri \n You can use the arguments in any order you want.\n\n Most flags are independent, you can use it alone or combine them in a single command interacting with each other when applicable.{self.visuals.RESET}",
-            formatter_class=argparse.ArgumentDefaultsHelpFormatter
+            formatter_class=argparse.RawTextHelpFormatter
             # formatter_class=argparse.RawTextHelpFormatter  # Formats the 'help' text manually
         )
 
